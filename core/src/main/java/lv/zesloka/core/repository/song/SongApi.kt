@@ -7,7 +7,7 @@ interface SongApi {
 
     suspend fun update(song: Song)
 
-    suspend fun getSong(id: Long): Song?
+    suspend fun getById(id: Long): Song?
 
     suspend fun getAll(): List<Song>
 
