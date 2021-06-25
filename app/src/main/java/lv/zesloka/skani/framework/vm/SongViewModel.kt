@@ -29,12 +29,12 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
         store.dispatch(SaveSong(currentSong.copy(title = title, content = content)))
     }
 
-    override fun newState(state: SongDetailsState) {
-        state.currentSong.let {
-            title.postValue(it.title)
-            content.postValue(it.content)
-        }
-    }
+//    override fun newState(state: SongDetailsState) {
+//        state.currentSong.let {
+//            title.postValue(it.title)
+//            content.postValue(it.content)
+//        }
+//    }
 
     override fun onCleared() {
         super.onCleared()

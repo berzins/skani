@@ -70,14 +70,16 @@ dependencies {
     // Redux
     implementation "org.reduxkotlin:redux-kotlin-threadsafe-jvm:0.5.5"
 
-    // Auth
+    // Amplify
     implementation 'com.amplifyframework:aws-api:1.18.0'
     implementation 'com.amplifyframework:aws-datastore:1.18.0'
-
     implementation 'com.amplifyframework:aws-auth-cognito:1.18.0'
 
+    // Logging
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
 }
