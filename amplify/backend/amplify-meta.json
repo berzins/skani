@@ -1,0 +1,66 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-skani-skani-153653-authRole",
+      "UnauthRoleArn": "arn:aws:iam::758116016465:role/amplify-skani-skani-153653-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::758116016465:role/amplify-skani-skani-153653-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-skani-skani-153653-deployment",
+      "UnauthRoleName": "amplify-skani-skani-153653-unauthRole",
+      "StackName": "amplify-skani-skani-153653",
+      "StackId": "arn:aws:cloudformation:us-east-1:758116016465:stack/amplify-skani-skani-153653/07e427e0-d5b2-11eb-9e4d-12ea182b4763",
+      "AmplifyAppId": "d2qt8t0larz0wg",
+      "AuthTriggerTemplateURL": ""
+    }
+  },
+  "api": {
+    "amplifyDatasource": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "description": "",
+              "apiKeyExpirationDays": 7
+            }
+          }
+        },
+        "GraphQLAPIIdOutput": "leexgxs2rrcgtmikwwi5aztxva",
+        "GraphQLAPIEndpointOutput": "https://3igm6scabzbarhmhzftntanglq.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-gtmthllyknfudpj5ekofcwdbqy"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-skani-skani-153653-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apiamplifyDatasource"
+      },
+      "lastPushTimeStamp": "2021-06-25T12:58:24.983Z",
+      "lastPushDirHash": "t7HKVyWY2WU+3JgaAOvZfIqQCE0="
+    }
+  },
+  "auth": {
+    "skanic2889139": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-skani-skani-153653-deployment/amplify-cfn-templates/auth/skanic2889139-cloudformation-template.yml",
+        "logicalId": "authskanic2889139"
+      },
+      "lastPushTimeStamp": "2021-06-25T12:58:24.983Z",
+      "output": {
+        "UserPoolId": "us-east-1_3nkMoXZDb",
+        "AppClientIDWeb": "1qd2j0715fdudprd23dj2va75u",
+        "AppClientID": "6ldhaqcl5ohsomh41s4ng4acgj",
+        "IdentityPoolId": "us-east-1:abe1c508-a9f9-489e-99c7-344f0818b338",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:758116016465:userpool/us-east-1_3nkMoXZDb",
+        "IdentityPoolName": "skanic2889139_identitypool_c2889139__skani",
+        "UserPoolName": "skanic2889139_userpool_c2889139"
+      },
+      "lastPushDirHash": "DmnJdS3ZDFN2DZGn9P5MGy9ZBt4="
+    }
+  }
+}
