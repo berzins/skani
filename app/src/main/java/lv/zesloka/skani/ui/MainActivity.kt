@@ -1,10 +1,8 @@
-package lv.zesloka.skani.presentation
+package lv.zesloka.skani.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.Navigation
 import lv.zesloka.skani.R
-import lv.zesloka.skani.presentation.song.SongListFragmentDirections
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

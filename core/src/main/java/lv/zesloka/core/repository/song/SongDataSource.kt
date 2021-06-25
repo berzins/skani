@@ -2,7 +2,7 @@ package lv.zesloka.core.repository.song
 
 import lv.zesloka.core.data.Song
 
-interface SongApi {
+interface SongDataSource {
     suspend fun add(song: Song)
 
     suspend fun update(song: Song)

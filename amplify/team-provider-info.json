@@ -1,0 +1,20 @@
+{
+  "skani": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-skani-skani-153653-authRole",
+      "UnauthRoleArn": "arn:aws:iam::758116016465:role/amplify-skani-skani-153653-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::758116016465:role/amplify-skani-skani-153653-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-skani-skani-153653-deployment",
+      "UnauthRoleName": "amplify-skani-skani-153653-unauthRole",
+      "StackName": "amplify-skani-skani-153653",
+      "StackId": "arn:aws:cloudformation:us-east-1:758116016465:stack/amplify-skani-skani-153653/07e427e0-d5b2-11eb-9e4d-12ea182b4763",
+      "AmplifyAppId": "d2qt8t0larz0wg"
+    },
+    "categories": {
+      "auth": {
+        "skanic2889139": {}
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-package lv.zesloka.skani.presentation.base
+package lv.zesloka.skani.ui.base
 
 import androidx.fragment.app.Fragment
 

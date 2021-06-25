@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/songListFragment"
-        android:name="lv.zesloka.skani.presentation.song.SongListFragment"
+        android:name="lv.zesloka.skani.ui.song.SongListFragment"
         android:label="fragment_song_list"
         tools:layout="@layout/fragment_song_list" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/songDetailsFragment"
-        android:name="lv.zesloka.skani.presentation.song.SongDetailsFragment"
+        android:name="lv.zesloka.skani.ui.song.SongDetailsFragment"
         android:label="SongDetailsFragment" >
         <argument
             android:name="songId"
