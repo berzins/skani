@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/songListFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/songListFragment"
         android:name="lv.zesloka.skani.ui.song.SongListFragment"
         android:label="fragment_song_list"
-        tools:layout="@layout/fragment_song_list" >
+        tools:layout="@layout/fragment_song_list">
         <action
             android:id="@+id/action_songListFragment_to_songDetailsFragment"
             app:destination="@id/songDetailsFragment" />
@@ -17,10 +17,18 @@
     <fragment
         android:id="@+id/songDetailsFragment"
         android:name="lv.zesloka.skani.ui.song.SongDetailsFragment"
-        android:label="SongDetailsFragment" >
+        android:label="SongDetailsFragment">
         <argument
             android:name="songId"
-            app:argType="long"
-            android:defaultValue="0L" />
+            android:defaultValue="0L"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="lv.zesloka.skani.ui.splash.SplashFragment"
+        android:label="SplashFragment">
+        <action
+            android:id="@+id/action_splashFragment_to_songListFragment"
+            app:destination="@id/songListFragment" />
     </fragment>
 </navigation>

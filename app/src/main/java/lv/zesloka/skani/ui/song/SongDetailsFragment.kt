@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import lv.zesloka.skani.databinding.FragmentSongDetailsBinding
-import lv.zesloka.skani.framework.vm.SongViewModel
+import lv.zesloka.skani.presentation.vm.SongViewModel
 import lv.zesloka.skani.ui.base.BaseFragment
 
 class SongDetailsFragment : BaseFragment() {
@@ -42,6 +42,9 @@ class SongDetailsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vm = ViewModelProviders.of(this).get(SongViewModel::class.java)
+        getAppComponent()?.inject(vm)
+
+        vm = ViewModelProviders.of(this).get(SongViewModel::class.java)
         vm.title.observe(viewLifecycleOwner, titleObserver)
         vm.content.observe(viewLifecycleOwner, contentObserver)
         binding.floatingActionButton.setOnClickListener {
@@ -49,7 +52,6 @@ class SongDetailsFragment : BaseFragment() {
                  binding.title.text.toString(),
                  binding.content.text.toString()
              )
-
         }
     }
 }

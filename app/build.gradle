@@ -5,22 +5,40 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 
+ext {
+    backend = [
+            develop : [
+                    songsServiceBaseUrl: "\"https:google.com\""
+            ],
+            release : [
+                    songsServiceBaseUrl: "\"https:google.com\""
+            ]
+    ]
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "lv.zesloka.skani"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField 'String', 'SONG_SERVICE_BASE_URL', backend.develop.songsServiceBaseUrl
     }
 
     buildTypes {
+        develop {
+            debuggable true
+            applicationIdSuffix = ".test"
+        }
         release {
+//            shringResources true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -39,7 +57,9 @@ android {
 
 dependencies {
 
-    implementation project(':core')
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
+
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.5.0'
@@ -57,10 +77,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
-    implementation "androidx.room:room-runtime:$room_version"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    kapt "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-ktx:$room_version"
 
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"

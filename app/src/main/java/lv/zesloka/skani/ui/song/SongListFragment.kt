@@ -12,7 +12,6 @@ class SongListFragment : BaseFragment() {
 
     private lateinit var binding: FragmentSongListBinding
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,7 +22,7 @@ class SongListFragment : BaseFragment() {
     }
 
     private fun init() {
-        binding.buttonAddSong.setOnClickListener{goToSongDetails()}
+        binding.buttonAddSong.setOnClickListener { goToSongDetails() }
     }
 
     private fun goToSongDetails(id: Long = 0L) {
