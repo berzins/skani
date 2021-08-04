@@ -53,6 +53,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    packagingOptions {
+//        exclude 'META-INF/DEPENDENCIES'
+        exclude("META-INF/*.kotlin_module")
+    }
 }
 
 dependencies {
@@ -60,12 +65,12 @@ dependencies {
     implementation project(path: ':domain')
     implementation project(path: ':data')
 
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.5.0'
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
 
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 
@@ -85,6 +90,11 @@ dependencies {
 
     // Redux
     implementation "org.reduxkotlin:redux-kotlin-threadsafe-jvm:0.5.5"
+
+//    implementation "org.reduxkotlin:redux-kotlin:0.2.6"
+    implementation "org.reduxkotlin:redux-kotlin-thunk:0.5.3"
+    implementation "org.reduxkotlin:reselect:0.5.5"
+    implementation "org.reduxkotlin:presenter-middleware:0.2.10"
 
     // Amplify
     implementation 'com.amplifyframework:aws-api:1.18.0'

@@ -3,45 +3,45 @@ package lv.zesloka.skani.presentation.vm
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import lv.zesloka.skani.presentation.redux.ActionDispatcher
 import lv.zesloka.skani.presentation.redux.action.SaveSong
-import lv.zesloka.skani.presentation.redux.appStore as store
-import lv.zesloka.skani.presentation.redux.state.song.RdxSongDetailsState
-import lv.zesloka.domain.model.Song
-import lv.zesloka.skani.presentation.redux.state.extentions.from
-import lv.zesloka.skani.presentation.redux.state.extentions.selectFrom
-import lv.zesloka.skani.presentation.redux.state.extentions.toSong
-import lv.zesloka.skani.presentation.redux.state.song.RdxSong
-import org.reduxkotlin.StoreSubscription
+import lv.zesloka.skani.presentation.redux.AppStoreSubscriber
+import lv.zesloka.skani.presentation.redux.state.app.RdxAppState
+import lv.zesloka.skani.presentation.redux.state.song.*
+import javax.inject.Inject
 
-class SongViewModel(application: Application) : AndroidViewModel(application) {
+open class SongViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val currentSong: Song
-    private val storeSubscription: StoreSubscription
+    @Inject
+    protected lateinit var storeSubscriber: AppStoreSubscriber
+
+    @Inject
+    protected lateinit var dispatcher: ActionDispatcher
+
     val title = MutableLiveData<String>()
     val content = MutableLiveData<String>()
     val shouldClose = MutableLiveData<Boolean>()
 
-    init {
-        storeSubscription = store.subscribe { }
-        val state = RdxSongDetailsState.selectFrom(store.state)
-        currentSong = state.currentSong.toSong()
-        title.postValue(currentSong.title)
-        content.postValue(currentSong.content)
+
+
+    fun init() {
+        storeSubscriber.onRender { state -> render(state) }
     }
 
     fun saveSong(title: String, content: String) {
-        store.dispatch(SaveSong(RdxSong.from(currentSong)
-            .copy(title = title, content = content)))
+//        dispatcher.dispatch(SaveSong(RdxSong.from(currentSong)
+//            .copy(title = title, content = content)))
     }
 
-//    override fun newState(state: SongDetailsState) {
-//        state.currentSong.let {
-//            title.postValue(it.title)
-//            content.postValue(it.content)
-//        }
-//    }
 
     override fun onCleared() {
         super.onCleared()
+    }
+
+    private fun render(state: RdxAppState) {
+        val songState = RdxSongDetailsState.selectFrom(state)
+        val currentSong = songState.currentSong.toSong()
+        title.postValue(currentSong.title)
+        content.postValue(currentSong.content)
     }
 }

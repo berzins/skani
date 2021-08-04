@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import lv.zesloka.skani.databinding.FragmentSplashBinding
 import lv.zesloka.skani.presentation.vm.SplashViewModel
+import lv.zesloka.skani.ui.MainActivity
 import lv.zesloka.skani.ui.base.BaseFragment
 
 class SplashFragment : BaseFragment() {
@@ -42,20 +43,5 @@ class SplashFragment : BaseFragment() {
             binding.initError.visibility = if (hasError) View.VISIBLE else View.INVISIBLE
             binding.initStateDescription.visibility = if (!hasError) View.VISIBLE else View.INVISIBLE
         })
-
-
-//        activity?.applicationContext?.let {
-//            Amplify.addPlugin(AWSCognitoAuthPlugin())
-//            Amplify.configure(it)
-//
-//            Amplify.Auth.fetchAuthSession(
-//                {
-//                    Timber.d("Auth session = '$it'")
-//                },
-//                {
-//                    Timber.e(it.toString())
-//                }
-//            )
-//        }
     }
 }

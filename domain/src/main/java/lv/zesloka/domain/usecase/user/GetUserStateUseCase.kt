@@ -1,12 +1,12 @@
 package lv.zesloka.domain.usecase.user
 
-import lv.zesloka.domain.contract.user.UserRepo
+import lv.zesloka.domain.contract.user.UserApi
 import lv.zesloka.domain.model.Result
 import lv.zesloka.domain.usecase.base.AbstractAsyncResultUseCase
 import lv.zesloka.domain.model.User
 
 public class GetUserStateUseCase constructor(
-    private val userRepo: UserRepo
+    private val userRepo: UserApi
 ):  AbstractAsyncResultUseCase<GetUserStateUseCase.Input, User>() {
 
     class Input

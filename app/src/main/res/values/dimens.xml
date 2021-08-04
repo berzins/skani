@@ -2,4 +2,15 @@
 <resources>
     <dimen name="float_button_margin">24dp</dimen>
     <dimen name="default_layout_margin">8dp</dimen>
+
+    <dimen name="text_header_mid">22sp</dimen>
+    <dimen name="text_regular_mid">16sp</dimen>
+    <dimen name="divider_thin">1dp</dimen>
+    <dimen name="divider_normal">4dp</dimen>
+    <dimen name="divider_fat">8dp</dimen>
+    <dimen name="toolbar_default">56dp</dimen>
+    <dimen name="nav_bar_action_button_size">24dp</dimen>
+    <dimen name="nav_bar_action_margin">16dp</dimen>
+    <dimen name="fragment_default_padding_horizontal">16dp</dimen>
+
 </resources>

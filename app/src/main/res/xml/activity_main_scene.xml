@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/collect_data">
+        <Constraint android:id="@+id/navigation_bar"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/verify_email">
+        <Constraint android:id="@id/navigation_bar" />
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/verify_email"
+        app:duration="300"
+        app:constraintSetStart="@+id/collect_data"
+        app:motionInterpolator="easeInOut" />
+</MotionScene>

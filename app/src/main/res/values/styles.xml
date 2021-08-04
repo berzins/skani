@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/mukata_malar_extra_light</item>
+    </style>
+
+    <style name="AppbarTheme" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorOnPrimary">@color/textTitle</item>
+        <item name="android:textColorPrimary">@color/textTitle</item>
+    </style>
+
+
+    <style name="Text" parent="AppTheme"></style>
+
+    <style name="TextHeader" parent="Text">
+        <item name="fontFamily">@font/mukata_malar_light</item>
+        <item name="android:textColor">@color/textTitle</item>
+    </style>
+
+    <style name="TextHeaderMid" parent="TextHeader">
+        <item name="android:textSize">@dimen/text_header_mid</item>
+    </style>
+
+    <style name="TextRegular" parent="Text">
+        <item name="android:fontFamily">@font/mukata_malar_light</item>
+        <item name="android:textColor">@color/textRegular</item>
+    </style>
+
+    <style name="TextRegularMid" parent="TextRegular">
+        <item name="android:textSize">@dimen/text_regular_mid</item>
+    </style>
+
+    <style name="TextRegularMidClickable" parent="TextRegularMid">
+        <item name="android:textColor">@drawable/selector_clickable_regular_text</item>
+        <item name="android:textStyle"></item>
+    </style>
+
+
+
+
+</resources>

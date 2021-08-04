@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/collect_data">
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/verify_email">
+        <Constraint
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:id="@+id/container_register"
+            app:layout_constraintBottom_toTopOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/done" >
+        <Constraint
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:id="@+id/container_register"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/container_verify_email" />
+        <Constraint
+            android:id="@+id/container_verify_email"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/container_done"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/container_verify_email"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/verify_email"
+        app:constraintSetStart="@+id/collect_data" />
+    <Transition
+        app:constraintSetStart="@+id/verify_email"
+        app:constraintSetEnd="@+id/done" />
+</MotionScene>

@@ -7,4 +7,14 @@
     <string name="init_info_starting_app">Starting app</string>
     <string name="txt_initialize">Initialize</string>
     <string name="txt_error">Error</string>
+    <string name="menu_item_close">Close</string>
+    <string name="text_title">Title</string>
+    <string name="title_login">Login</string>
+    <string name="input_description_username">Username</string>
+    <string name="input_description_password">Password</string>
+    <string name="default_action_button_text">Go</string>
+    <string name="login_not_registered">Not Registered?</string>
+    <string name="login_register_here"><u>Register here.</u></string>
+    <string name="register_term_of_use">Terms of use</string>
+    <string name="input_description_email">Email</string>
 </resources>

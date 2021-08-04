@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/description"
+            android:textColor="@drawable/selector_input_field_text_color"
+            style="@style/TextRegularMid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/input"
+            style="@style/TextRegularMid"
+            android:textColor="@drawable/selector_input_field_text_color"
+            android:background="@drawable/selector_input_field_underline"
+            android:paddingStart="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
+            android:lines="1"
+            />
+
+    </LinearLayout>
+
+</merge>
