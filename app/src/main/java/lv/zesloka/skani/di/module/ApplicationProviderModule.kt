@@ -1,6 +1,7 @@
 package lv.zesloka.skani.di.module
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Application
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -16,5 +17,6 @@ class ApplicationProviderModule constructor(private val application: Application
 
     @Provides
     fun providesCurrentActivity(): Activity? = (application as SkaniApplication).getCurrentActivity()
+
 
 }

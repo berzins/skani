@@ -4,8 +4,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import lv.zesloka.domain.contract.user.UserApi
 import lv.zesloka.domain.model.User
-import lv.zesloka.domain.model.auth.AuthSignIn
-import lv.zesloka.domain.model.auth.AuthSignUp
+import lv.zesloka.domain.model.auth.signin.AuthSignIn
+import lv.zesloka.domain.model.auth.signup.AuthSignUp
 
 class UserApiImpl constructor(private val awsDataSource: UserDataSource) : UserApi {
     override suspend fun getUser(): User {

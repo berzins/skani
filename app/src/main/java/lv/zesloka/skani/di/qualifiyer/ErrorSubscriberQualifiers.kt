@@ -4,12 +4,8 @@ import javax.inject.Qualifier
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
-annotation class QUserName
+annotation class QSignInErrorSubscriber
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
-annotation class QPassword
-
-@Qualifier
-@Retention(AnnotationRetention.RUNTIME)
-annotation class QEmail
+annotation class RegisterErrorSubscriber

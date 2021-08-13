@@ -2,8 +2,7 @@ package lv.zesloka.domain.usecase.user
 
 import lv.zesloka.domain.contract.user.UserApi
 import lv.zesloka.domain.model.Result
-import lv.zesloka.domain.model.auth.AuthSignIn
-import lv.zesloka.domain.model.auth.AuthSignUp
+import lv.zesloka.domain.model.auth.signin.AuthSignIn
 import lv.zesloka.domain.usecase.base.AbstractAsyncResultUseCase
 
 class SignInUserUseCase constructor(

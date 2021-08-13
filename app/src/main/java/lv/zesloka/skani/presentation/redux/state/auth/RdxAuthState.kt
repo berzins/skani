@@ -1,26 +1,35 @@
 package lv.zesloka.skani.presentation.redux.state.auth
 
+import lv.zesloka.skani.presentation.redux.state.error.RdxError
+
 data class RdxAuthState(
-    val login: RdxLogin,
+    val signIn: RdxSignInState,
     val registration: RdxRegistration
 ) {
-    companion object {}
+    companion object
 }
 
 data class RdxRegistration(
+    val isInLoadingState: Boolean,
     val isCompleted: Boolean,
     val input: RdxRegistrationInput,
     val nextStep: RdxNextSignUpStep,
-    val signUpStage: RdxSignUpStage = RdxSignUpStage.SIGN_UP
+    val signUpStage: RdxSignUpStage = RdxSignUpStage.SIGN_UP,
+    val error: RdxError
 ) {
-    companion object {}
+    companion object
 }
 
-data class RdxLogin(
-    val username: RdxInputField<String>,
-    val password: RdxInputField<String>
+data class RdxSignInState(
+    val isSignInInProgress: Boolean,
+    val input: RdxSignInInput,
+    val error: RdxError
 ) {
-    companion object {}
+    companion object
+}
+
+data class RdxSignInInput(val username: RdxInputField<String>, val password: RdxInputField<String>) {
+    companion object
 }
 
 data class RdxInputField<T>(val value: T, val isValid: Boolean, val errorCode: Int) {

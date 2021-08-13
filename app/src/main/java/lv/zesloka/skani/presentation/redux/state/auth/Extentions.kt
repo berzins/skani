@@ -1,33 +1,44 @@
 package lv.zesloka.skani.presentation.redux.state.auth
 
 import lv.zesloka.domain.model.auth.AuthActoinDeliveryType
-import lv.zesloka.domain.model.auth.AuthSignUp
-import lv.zesloka.domain.model.auth.NextSignUpAction
-import lv.zesloka.domain.usecase.base.ErrorCodes
+import lv.zesloka.domain.model.auth.signup.AuthSignUp
+import lv.zesloka.domain.model.auth.signup.NextSignUpAction
+import lv.zesloka.domain.usecase.base.ErrorCode
 import lv.zesloka.skani.presentation.redux.state.app.RdxAppState
+import lv.zesloka.skani.presentation.redux.state.error.RdxError
+import lv.zesloka.skani.presentation.redux.state.error.initial
 
 /*  INITIAL */
 
 fun RdxInputField.Companion.initialString(): RdxInputField<String> =
-    RdxInputField("",false, ErrorCodes.NONE)
+    RdxInputField("",false, ErrorCode.NONE)
 
-fun RdxLogin.Companion.initial(): RdxLogin =
-    RdxLogin(
+fun RdxSignInState.Companion.initial(): RdxSignInState =
+    RdxSignInState(
+        isSignInInProgress = false,
+        input = RdxSignInInput.initial(),
+        error = RdxError.initial()
+    )
+
+fun RdxSignInInput.Companion.initial(): RdxSignInInput =
+    RdxSignInInput(
         username = RdxInputField.initialString(),
         password = RdxInputField.initialString()
     )
 
 fun RdxRegistration.Companion.initial(): RdxRegistration =
     RdxRegistration(
+        isInLoadingState = false,
         isCompleted = false,
         input = RdxRegistrationInput.initial(),
         nextStep = RdxNextSignUpStep.initial(),
-        signUpStage = RdxSignUpStage.SIGN_UP
+        signUpStage = RdxSignUpStage.SIGN_UP,
+        error = RdxError.initial()
     )
 
 fun RdxAuthState.Companion.initial(): RdxAuthState =
     RdxAuthState(
-        login = RdxLogin.initial(),
+        signIn = RdxSignInState.initial(),
         registration = RdxRegistration.initial()
     )
 
@@ -56,10 +67,13 @@ fun RdxAuthState.Companion.selectFrom(state: RdxAppState) = state.authState
 fun RdxRegistration.Companion.selectFrom(state: RdxAppState) =
     RdxAuthState.selectFrom(state).registration
 
+fun RdxSignInState.Companion.selectFrom(state: RdxAppState) =
+    RdxAuthState.selectFrom(state).signIn
+
 
 /* MAPPERS */
 
-fun RdxNextSignUpStep.Companion.from(signUpResult: AuthSignUp): RdxNextSignUpStep {
+fun RdxNextSignUpStep.Companion.fromSuccess(signUpResult: AuthSignUp): RdxNextSignUpStep {
     return RdxNextSignUpStep(
         user = RdxSignUpUser(signUpResult.user.userId, signUpResult.user.username),
         action = signUpResult.nextSignUpStep.action.toRdxSignUpAction(),

@@ -1,27 +1,39 @@
 package lv.zesloka.skani.presentation.redux.action
 
 sealed class ValidationActions {
-    sealed class Auth {
-        sealed class Username {
-            data class Validate(val username: String)
-            data class Success(val username: String)
-            data class Failure(val username: String, val reason: ValidationError)
-        }
+    class UnsupportedRequest(request: String.Validate)
 
-        sealed class Email {
-            data class Validate(val email: String)
-            data class Success(val email: String)
-            data class Failure(val email: String, val reason: ValidationError)
-        }
+    sealed class String {
+        data class Validate(val target: Target, val field: Field, val value: kotlin.String)
+        data class Success(val target: Target, val field: Field, val value: kotlin.String)
+        data class Error(
+            val target: Target,
+            val field: Field,
+            val value: kotlin.String,
+            val errorCode: Int
+        )
+    }
 
-        sealed class Password {
-            data class Validate(val password: String)
-            data class Success(val password: String)
-            data class Failure(val password: String, val reason: ValidationError)
-        }
+
+    /**
+     * Such as screenS widgets and any other logical identifiers what can have things to validate
+     */
+    enum class Target {
+        SIGN_UP
+    }
+
+    /**
+     * A field name to indicate what precisely is validated
+     */
+    enum class Field {
+        USERNAME,
+        EMAIL,
+        PASSWORD,
+        VERIFICATION_CODE
     }
 }
 
-enum class ValidationError {
-    UNKNOWN
-}
+//enum class ValidationError {
+//    UNKNOWN
+//}
+

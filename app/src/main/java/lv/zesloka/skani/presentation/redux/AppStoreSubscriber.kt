@@ -9,7 +9,7 @@ typealias StateSelector = (state: RdxAppState) -> Any?
 
 typealias RenderFun = (state: RdxAppState) -> Unit
 
-interface AppStoreSubscriber {
+interface AppStoreSubscriber: DisposableSubscriber {
     fun onRender(render: RenderFun)
 }
 
@@ -26,10 +26,10 @@ open class BaseStoreSubscriber(
 ) : AppStoreSubscriber {
     private var state: RdxAppState = store.state
     private var firstRun = true
+    private var subscription: () -> Unit = {}
 
     private fun subscribeWith(render: RenderFun) {
-        val subscription = store.subscribe {
-
+        subscription = store.subscribe {
             try {
                 val newState = store.state
 
@@ -54,6 +54,10 @@ open class BaseStoreSubscriber(
 
     override fun onRender(render: RenderFun) {
         subscribeWith(render)
+    }
+
+    override fun dispose() {
+        subscription()
     }
 }
 

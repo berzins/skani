@@ -12,18 +12,35 @@ fun userActionMiddleware(userThunks: UserThunks) = middleware<RdxAppState> { sto
     val dispatch = store.dispatch
     val result = next(action)
     when (action) {
+        /* USER STATUS */
         is UserActions.GetUserStatus -> dispatch(userThunks.fetchUserStatus())
+        is UserActions.UserStateSuccess -> {
+            if (action.isSignedIn) {
+                dispatch(NavigationActions.StartNavigation(Screen.HOME))
+            } else {
+                dispatch(NavigationActions.StartNavigation(Screen.LOGIN))
+            }
+        }
+
+        /* SIGN UP */
         is UserActions.Register.SignUp.Start ->
             dispatch(userThunks.registerUser(action.username, action.email, action.password))
         is UserActions.Register.VerifyEmail.Start ->
-            dispatch(userThunks.verifyEmail(
-                username = action.username,
-                code = action.code
-            ))
+            dispatch(userThunks.verifyEmail(action.username, action.code))
         is UserActions.Register.Complete ->
             dispatch(NavigationActions.StartNavigation(Screen.LOGIN))
+
+        /* SIGN IN */
         is UserActions.SignIn.Start ->
             dispatch(userThunks.signIn(action.username, action.password))
+        is UserActions.SignIn.Success -> {
+            dispatch(NavigationActions.StartNavigation(Screen.HOME))
+        }
+
+        /* SIGN OUT*/
+        is UserActions.SignOut.Start -> dispatch(userThunks.signOut())
+        is UserActions.SignOut.Success ->
+            dispatch(NavigationActions.StartNavigation(Screen.LOGIN))
     }
     result
 }

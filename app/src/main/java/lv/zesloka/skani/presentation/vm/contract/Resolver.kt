@@ -1,5 +1,5 @@
 package lv.zesloka.skani.presentation.vm.contract
 
-interface StringResolver {
-    fun get() : String
+interface Resolver<Out> {
+    fun get(): Out
 }

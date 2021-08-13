@@ -11,9 +11,7 @@ class ValidatePasswordUseCase: AbstractAsyncResultUseCase<ValidatePasswordUseCas
     data class Input(val password: String)
 
     override suspend fun act(input: Input): Result<Decision> {
-        val decision = IsStringNotEmpty(
-            input.password
-        ).validate()
+        val decision = IsStringNotEmpty(input.password).validate()
         return Result.Success(decision)
     }
 

@@ -17,4 +17,20 @@
     <string name="login_register_here"><u>Register here.</u></string>
     <string name="register_term_of_use">Terms of use</string>
     <string name="input_description_email">Email</string>
+    <string name="generic_error_title">Error</string>
+    <string name="sign_in_dialog_title">Sign In</string>
+    <string name="msg_wrong_user_password">Username or password is incorrect.</string>
+    <string name="positive_action_label">Ok</string>
+    <string name="generic_error_message">Something went wrong</string>
+    <string name="err_msg_input_username_too_short">Userame is too short</string>
+    <string name="err_msg_input_username_too_long">Username is too long</string>
+    <string name="err_msg_unknown">Unknown error</string>
+    <string name="err_msg_input_email_invalid">Please enter valid email address</string>
+    <string name="err_msg_input_password_empty">Please enter a password</string>
+    <string name="title_sign_up">Sign Up</string>
+    <string name="err_msg_invalid_sign_up_input">Some of input values are invalid. Please fix them and try again!</string>
+    <string name="user_logged_in">User is logged in</string>
+    <string name="user_not_logged_in">User not logged in</string>
+    <string name="err_msg_error_happened">Unexpected error occured</string>
+    <string name="err_msg_invalid_email_verify_code">Invalid email verify code. Try again!</string>
 </resources>

@@ -4,7 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import lv.zesloka.domain.model.Result
-import lv.zesloka.domain.usecase.base.ErrorCodes
+import lv.zesloka.domain.usecase.base.ErrorCode
 import lv.zesloka.domain.usecase.user.GetUserStateUseCase
 import lv.zesloka.skani.di.qualifiyer.IOCoroutineContext
 import lv.zesloka.skani.presentation.model.navigation.Screen
@@ -29,14 +29,9 @@ class AppInitThunks @Inject constructor(
             val result = getUserStateUseCase.runWith(GetUserStateUseCase.Input())
             if (result is Result.Success) {
                 dispatch(UserActions.UserStateSuccess(result.data.isSignedIn))
-                if (result.data.isSignedIn) {
-                    dispatch(NavigationActions.StartNavigation(Screen.HOME))
-                } else {
-                    dispatch(NavigationActions.StartNavigation(Screen.LOGIN))
-                }
             } else {
                 val error = result as Result.Error
-                dispatch(UserActions.UserStateError(ErrorCodes.UNKNOWN, error.exception.toString()))
+                dispatch(UserActions.UserStateError(ErrorCode.UNKNOWN, error.exception.toString()))
             }
         }
     }

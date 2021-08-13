@@ -6,13 +6,13 @@
     app:startDestination="@id/splashFragment">
 
     <fragment
-        android:id="@+id/songListFragment"
-        android:name="lv.zesloka.skani.ui.song.SongListFragment"
-        android:label="fragment_song_list"
+        android:id="@+id/homeFragment"
+        android:name="lv.zesloka.skani.ui.song.HomeFragment"
+        android:label="fragment_home"
         tools:layout="@layout/fragment_song_list">
         <action
-            android:id="@+id/action_songListFragment_to_songDetailsFragment"
-            app:destination="@id/songDetailsFragment" />
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/songDetailsFragment"
@@ -29,7 +29,7 @@
         android:label="SplashFragment">
         <action
             android:id="@+id/action_splashFragment_to_songListFragment"
-            app:destination="@id/songListFragment"
+            app:destination="@id/homeFragment"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
         <action
@@ -48,7 +48,7 @@
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_songListFragment"
-            app:destination="@id/songListFragment"
+            app:destination="@id/homeFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
@@ -73,6 +73,6 @@
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
     </fragment>
 </navigation>

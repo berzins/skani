@@ -45,8 +45,7 @@ abstract class Validator {
 
     suspend fun validate(): Decision {
         return if (next != null) {
-            val result = next?.getValidationResult()!!
-
+            val result = next?.validate()!!
             if (result is AllCool) {
                 getValidationResult()
             } else {

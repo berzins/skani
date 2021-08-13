@@ -1,8 +1,8 @@
 package lv.zesloka.domain.contract.user
 
 import lv.zesloka.domain.model.User
-import lv.zesloka.domain.model.auth.AuthSignIn
-import lv.zesloka.domain.model.auth.AuthSignUp
+import lv.zesloka.domain.model.auth.signin.AuthSignIn
+import lv.zesloka.domain.model.auth.signup.AuthSignUp
 
 public interface UserApi {
     suspend fun getUser(): User

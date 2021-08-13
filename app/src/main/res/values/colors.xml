@@ -7,21 +7,22 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="error">#FF1100</color>
+    <color name="error">#ED3434</color>
 
     <color name="colorPrimary">#373646</color>
     <color name="colorPrimaryDark">#2A303E</color>
     <color name="colorAccent">#CECECE</color>
 
-
     <color name="textRegular">#CECECE</color>
     <color name="textTitle">#F4EFEF</color>
 
     <color name="clickableAccent">#B9BBED</color>
+    <color name="disabled">#CECECE</color>
 
     <color name="textInputFocused">@color/white</color>
     <color name="textInput">@color/textRegular</color>
     <color name="primary_button_enabled_stroke">@color/clickableAccent</color>
+    <color name="primary_button_disabled_stroke">@color/disabled</color>
     <color name="clickableText">#8AA0D0</color>
     <color name="clickableTextPressed">#3F51B5</color>
 

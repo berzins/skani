@@ -4,10 +4,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import lv.zesloka.domain.model.Result
-import lv.zesloka.domain.model.auth.NextSignUpAction
+import lv.zesloka.domain.model.auth.signin.AuthNextSignInAction
+import lv.zesloka.domain.model.auth.signup.NextSignUpAction
 import lv.zesloka.domain.model.validators.AllCool
 import lv.zesloka.domain.model.validators.Decision
-import lv.zesloka.domain.usecase.base.ErrorCodes
+import lv.zesloka.domain.usecase.base.ErrorCode
 import lv.zesloka.domain.usecase.toErrorString
 import lv.zesloka.domain.usecase.user.*
 import lv.zesloka.domain.usecase.validation.ValidateEmailUseCase
@@ -15,9 +16,9 @@ import lv.zesloka.domain.usecase.validation.ValidatePasswordUseCase
 import lv.zesloka.domain.usecase.validation.ValidateUsernameUseCase
 import lv.zesloka.skani.di.qualifiyer.IOCoroutineContext
 import lv.zesloka.skani.presentation.redux.action.UserActions
-import lv.zesloka.skani.presentation.redux.action.ValidationActions
 import lv.zesloka.skani.presentation.redux.state.app.RdxAppState
 import org.reduxkotlin.Thunk
+import timber.log.Timber
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -45,7 +46,7 @@ class UserThunks @Inject constructor(
                 dispatch(UserActions.UserStateSuccess(result.data.isSignedIn))
             } else {
                 val error = result as Result.Error
-                dispatch(UserActions.UserStateError(ErrorCodes.UNKNOWN, error.exception.toString()))
+                dispatch(UserActions.UserStateError(ErrorCode.UNKNOWN, error.exception.toString()))
             }
         }
     }
@@ -55,26 +56,34 @@ class UserThunks @Inject constructor(
             launch {
                 val isInputValid = validateSignUpInput(username, email, password)
                 if (isInputValid) {
-                    dispatch(ValidationActions.Auth.Username.Success(username))
-                    dispatch(ValidationActions.Auth.Email.Success(email))
-                    dispatch(ValidationActions.Auth.Password.Success(password))
 
                     val result = signUpUserUseCase.runWith(
                         SignUpUserUseCase.Input(username, email, password)
                     )
-                    if (result is Result.Success && result.data.isSignUpComplete) {
-                        val signUpResult = result.data
-                        when (signUpResult.nextSignUpStep.action) {
-                            NextSignUpAction.DONE ->
-                                dispatch(UserActions.Register.Complete())
-                            else -> dispatch(
-                                UserActions.Register.SignUp.Success(
-                                    signUp = signUpResult
+
+                    when (result) {
+                        is Result.Success -> {
+                            val signUpResult = result.data
+                            when (signUpResult.nextSignUpStep.action) {
+                                NextSignUpAction.DONE ->
+                                    dispatch(UserActions.Register.Complete())
+                                else -> dispatch(
+                                    UserActions.Register.SignUp.Success(
+                                        signUp = signUpResult
+                                    )
                                 )
-                            )
+                            }
                         }
+                        is Result.Error -> dispatch(
+                            UserActions.Register.SignUp.Error(result.code)
+                        )
+                        else -> Timber.e("Something went terribly wrong!")
+                    }
+
+                    if (result is Result.Success && result.data.isSignUpComplete) {
+
                     } else {
-                        dispatch(UserActions.Register.SignUp.Error(result.toErrorString()))
+
                     }
                 }
             }
@@ -88,12 +97,11 @@ class UserThunks @Inject constructor(
                     verifyCode = code
                 )
             )
-            if (result is Result.Success) {
-                dispatch(UserActions.Register.VerifyEmail.Success(result.data))
-            } else {
-                dispatch(
-                    UserActions.Register.VerifyEmail.Error(result.toErrorString())
-                )
+            when (result) {
+                is Result.Success ->
+                    dispatch(UserActions.Register.VerifyEmail.Success(result.data))
+                is Result.Error ->
+                    dispatch(UserActions.Register.VerifyEmail.Error(result.code))
             }
         }
     }
@@ -102,14 +110,27 @@ class UserThunks @Inject constructor(
         launch {
             val result = signInUserUseCase.runWith(
                 SignInUserUseCase.Input(
-                username = username,
-                password = password
-            ))
-            if (result is Result.Success) {
-                // todo: do magic here
-            } else {
-                dispatch(UserActions.SignIn.Error(result.toErrorString()))
+                    username = username,
+                    password = password
+                )
+            )
+            when (result) {
+                is Result.Success -> {
+                    with(result.data) {
+                        if (this.isSignInComplete
+                            && this.nextStep.nextSignInAction == AuthNextSignInAction.DONE
+                        ) {
+                            dispatch(UserActions.SignIn.Success(this))
+                        } else {
+                            //todo: handle next steps here.
+                        }
+                    }
+                }
+                is Result.Error -> {
+                    dispatch(UserActions.SignIn.Error(result.code))
+                }
             }
+
         }
     }
 
@@ -117,7 +138,7 @@ class UserThunks @Inject constructor(
         launch {
             val result = signOutUserUseCase.runWith(SignOutUserUseCase.Input())
             if (result is Result.Success) {
-                // todo: Navigate to Login
+                dispatch(UserActions.SignOut.Success())
             } else {
                 dispatch(UserActions.SignOut.Error(result.toErrorString()))
             }

@@ -5,14 +5,13 @@ import dagger.Provides
 import lv.zesloka.skani.di.qualifiyer.*
 import lv.zesloka.skani.presentation.redux.*
 import lv.zesloka.skani.presentation.redux.middlware.*
-import lv.zesloka.skani.presentation.redux.middlware.thunk.AppInitThunks
-import lv.zesloka.skani.presentation.redux.middlware.thunk.AuthInputValidationThunks
-import lv.zesloka.skani.presentation.redux.middlware.thunk.NavigationThunks
-import lv.zesloka.skani.presentation.redux.middlware.thunk.UserThunks
+import lv.zesloka.skani.presentation.redux.middlware.thunk.*
 import lv.zesloka.skani.presentation.redux.reducer.appReducer
 import lv.zesloka.skani.presentation.redux.state.app.RdxAppState
 import lv.zesloka.skani.presentation.redux.state.app.initial
 import lv.zesloka.skani.presentation.redux.state.auth.RdxAuthState
+import lv.zesloka.skani.presentation.redux.state.auth.RdxRegistration
+import lv.zesloka.skani.presentation.redux.state.auth.RdxSignInState
 import lv.zesloka.skani.presentation.redux.state.auth.selectFrom
 import lv.zesloka.skani.presentation.redux.state.user.RdxUserState
 import lv.zesloka.skani.presentation.redux.state.user.selectFrom
@@ -30,7 +29,9 @@ class StoreModule {
         @UICoroutineContext uiContext: CoroutineContext,
         userThunks: UserThunks,
         navigationThunks: NavigationThunks,
-        authInputValidationThunks: AuthInputValidationThunks,
+        validateUsernameThunk: ValidateUsernameThunk,
+        validateEmailThunk: ValidateEmailThunk,
+        validatePasswordThunk: ValidatePasswordThunk,
         appInitThunks: AppInitThunks
     ): Store<RdxAppState> = createThreadSafeStore(
         reducer = combineReducers(::appReducer),
@@ -45,7 +46,11 @@ class StoreModule {
                     initializationMiddleware(appInitThunks),
                     userActionMiddleware(userThunks),
                     navigationMiddleware(navigationThunks),
-                    validationMiddleware(authInputValidationThunks)
+                    validationMiddleware(
+                        validateUsernameThunk = validateUsernameThunk,
+                        validateEmailThunk = validateEmailThunk,
+                        validatePasswordThunk = validatePasswordThunk
+                    )
                 )
             )
         )
@@ -68,7 +73,7 @@ class StoreModule {
     fun providesLoginStoreSubscriber(store: Store<RdxAppState>): AppStoreSubscriber =
         StoreSubscriberWithStateCompare(
             store = store,
-            stateSelectors = listOf { state -> RdxUserState.selectFrom(state) }
+            stateSelectors = listOf { state -> RdxAuthState.selectFrom(state) }
         )
 
     @Provides
@@ -81,9 +86,20 @@ class StoreModule {
 
     @Provides
     fun providesBaseStoreSubscriber(store: Store<RdxAppState>): AppStoreSubscriber =
-          BaseStoreSubscriber(store)
+        BaseStoreSubscriber(store)
 
     @Provides
     fun providesAppStateProvider(store: Store<RdxAppState>): AppStateProvider<RdxAppState> =
         AppStateProviderImpl(store)
+
+
+    @Provides
+    @QSignInErrorSubscriber
+    fun providesSignInErrorSubscriber(store: Store<RdxAppState>): ErrorSubscriber =
+        BaseErrorSubscriber(store) { state -> RdxSignInState.selectFrom(state).error }
+
+    @Provides
+    @RegisterErrorSubscriber
+    fun providesSignUpErrorSubscriber(store: Store<RdxAppState>): ErrorSubscriber =
+        BaseErrorSubscriber(store) { state -> RdxRegistration.selectFrom(state).error }
 }

@@ -38,6 +38,10 @@ annotation class QRegisterNavigator
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
+annotation class QHomeScreenNavigator
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
 annotation class QDefaultAppNavigators
 
 

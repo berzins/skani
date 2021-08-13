@@ -37,12 +37,24 @@
         <item name="android:textSize">@dimen/text_regular_mid</item>
     </style>
 
+    <style name="TextRegularSmall" parent="TextRegular">
+        <item name="android:textSize">@dimen/text_regular_small</item>
+    </style>
+
     <style name="TextRegularMidClickable" parent="TextRegularMid">
         <item name="android:textColor">@drawable/selector_clickable_regular_text</item>
         <item name="android:textStyle"></item>
     </style>
 
+    <style name="TextError" parent="Text">
+        <item name="fontFamily">@font/mukata_malar_extra_bold</item>
+        <item name="android:textColor">@color/error</item>
+    </style>
+
+    <style name="TextErrorField" parent="TextError">
+        <item name="android:textSize">@dimen/text_error_small</item>
+    </style>
 
 
-
+    <dimen name="text_error_small">14sp</dimen>
 </resources>

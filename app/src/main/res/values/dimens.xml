@@ -5,6 +5,7 @@
 
     <dimen name="text_header_mid">22sp</dimen>
     <dimen name="text_regular_mid">16sp</dimen>
+    <dimen name="text_regular_small">14sp</dimen>
     <dimen name="divider_thin">1dp</dimen>
     <dimen name="divider_normal">4dp</dimen>
     <dimen name="divider_fat">8dp</dimen>

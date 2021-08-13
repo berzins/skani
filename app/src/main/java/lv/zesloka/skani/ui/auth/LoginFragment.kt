@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import lv.zesloka.skani.R
 import lv.zesloka.skani.databinding.FragmentLoginBinding
 import lv.zesloka.skani.presentation.vm.auth.LoginViewModel
 import lv.zesloka.skani.ui.MainActivity
 import lv.zesloka.skani.ui.base.BaseFragment
+import lv.zesloka.skani.ui.widgets.dialog.DialogBuilderOwner
 import lv.zesloka.skani.ui.widgets.navbar.*
 import javax.inject.Inject
 
@@ -17,6 +19,9 @@ open class LoginFragment : BaseFragment() {
 
     @Inject
     protected lateinit var navBarOwner: NavigationBarOwner
+
+    @Inject
+    protected lateinit var dialogBuilderOwner: DialogBuilderOwner
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var vm: LoginViewModel
@@ -38,15 +43,31 @@ open class LoginFragment : BaseFragment() {
         vm.init()
 
         setupNavBar(navBarOwner.getNavBar())
+
         binding.actionRegister.setOnClickListener {
             vm.onRegisterAction()
         }
+
         binding.actionLogin.setOnClickListener {
             vm.onLoginAction(
                 username = binding.username.getInput(),
                 password = binding.password.getInput()
             )
         }
+
+        vm.isSignInLoading.observe(viewLifecycleOwner, Observer {
+            binding.actionLogin.setIsLoading(it)
+        })
+
+        vm.errorDialog.observe(viewLifecycleOwner, { error ->
+            dialogBuilderOwner.getBuilder()
+                ?.setTitle(error.title)
+                ?.setMessage(error.message)
+                ?.setPositiveButton(error.actionLabel) { _, _ ->
+                    error.action()
+                }
+                ?.show()
+        })
     }
 
     private fun inject() {
@@ -56,7 +77,7 @@ open class LoginFragment : BaseFragment() {
 
     private fun setupNavBar(navBar: NavigationBar) {
         ClearNavBar()
-            .add(SetLeftAction(R.drawable.ic_back_24) {activity?.onBackPressed()})
+            .add(SetLeftAction(R.drawable.ic_back_24) { activity?.onBackPressed() })
             .add(SetTitle("Login"))
             .applyTo(navBar)
     }

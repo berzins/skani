@@ -2,6 +2,8 @@ package lv.zesloka.skani.ui.base
 
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import lv.zesloka.skani.SkaniApplication
 import lv.zesloka.skani.di.AppComponent
 import lv.zesloka.skani.presentation.redux.ActionDispatcher
@@ -26,5 +28,9 @@ abstract class BaseFragment : Fragment(), BackNavigationListener {
         // a place to do something on back..
         // or just block it and let the screens to override this if necessary
         return false
+    }
+
+    protected fun <T> observe(data: LiveData<T>, observer: Observer<T>) {
+        data.observe(viewLifecycleOwner, observer)
     }
 }

@@ -1,6 +1,7 @@
 package lv.zesloka.domain.model.validators
 
 import lv.zesloka.domain.contract.Validator
+import lv.zesloka.domain.model.exception.ValidationInvalidEmailException
 import java.util.regex.Pattern
 
 data class IsValidEmailAddress(val email: String): Validator() {
@@ -20,8 +21,7 @@ data class IsValidEmailAddress(val email: String): Validator() {
 
     override suspend fun getValidationResult(): Decision {
         val isValidEmail = EMAIL_ADDRESS_PATTERN.matcher(email).matches()
-        return if (isValidEmail) AllCool() else NotCool(
-            this
-        )
+        return if (isValidEmail) AllCool()
+        else throw ValidationInvalidEmailException(this)
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -26,6 +27,16 @@
             android:paddingVertical="8dp"
             android:lines="1"
             />
+
+        <TextView
+            android:id="@+id/error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/error"
+            android:visibility="invisible"
+            android:layout_marginTop="4dp"
+            style="@style/TextRegularSmall"
+            tools:text="some error message"/>
 
     </LinearLayout>
 

@@ -1,8 +1,8 @@
 package lv.zesloka.data.user
 
 import lv.zesloka.domain.model.User
-import lv.zesloka.domain.model.auth.AuthSignIn
-import lv.zesloka.domain.model.auth.AuthSignUp
+import lv.zesloka.domain.model.auth.signin.AuthSignIn
+import lv.zesloka.domain.model.auth.signup.AuthSignUp
 
 interface UserDataSource {
     suspend fun getUser(): User
